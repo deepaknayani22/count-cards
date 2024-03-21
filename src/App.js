@@ -31,10 +31,10 @@ function App() {
     setTimeout(() => {
       setDiscardPile([
         ...discardPile,
-        { ...drawnCard, position: [-5, 0, -0.05 * discardPile.length] },
+        { ...drawnCard, position: [-5, 0, -0.02 * discardPile.length] },
       ]); // Add to discard pile
       setSelectedCard(null);
-    }, 1000); // Adjust timeout as needed
+    }, 100); // Adjust timeout as needed
   };
 
   return (
