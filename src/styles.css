@@ -1,0 +1,12 @@
+body,
+html,
+#root,
+.App {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* Prevents scrolling */
+}
+
+canvas {
+  display: block; /* Removes the margin below the canvas */
+}
