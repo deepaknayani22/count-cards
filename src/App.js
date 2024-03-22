@@ -1,70 +1,77 @@
-import React, { useState, Suspense } from "react";
+import React, { Suspense, useCallback, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import Card from "./Card";
 import "./styles.css";
 
 function App() {
-  // Adjust deck initialization to include rotation for tilting forward
+  //INITIALIZING DECK
+  console.log("App");
   const [deck, setDeck] = useState(
     new Array(52).fill(null).map((_, index) => ({
-      position: [5, 0, 0.02 * index], // Adjust z position based on index to create thickness
-      rotation: [-Math.PI / 4, 0, 0], // Tilt forward by 45 degrees
+      id: index,
+      animateToPosition: [5, 0, 0.02 * index], // Starts on the right
       flip: false,
     }))
   );
+
+  // const [deck, setDeck] = useState([
+  //   { id: 0, animateToPosition: [5, 0, 0], flip: false },
+  //   { id: 1, animateToPosition: [5, 0, 0.02], flip: false },
+  //   { id: 2, animateToPosition: [5, 0, 0.04], flip: false },
+  //   { id: 3, animateToPosition: [5, 0, 0.06], flip: false },
+  // ]);
+
   const [discardPile, setDiscardPile] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
 
-  const drawCard = () => {
-    if (deck.length === 0 || selectedCard) return;
+  const drawCard = (index) => {
+    // Step 1: Move to the middle and flip
+    console.log("OnClick");
 
-    const [drawnCard, ...newDeck] = deck; // Extract the top card and the rest of the deck
+    let newDeck = [...deck];
+    console.log(newDeck);
+    newDeck[index] = {
+      ...newDeck[index],
+      animateToPosition: [0, 0, 0], // Move to the center
+      flip: true, // Flip to show the face
+    };
     setDeck(newDeck);
 
-    setSelectedCard({
-      ...drawnCard,
-      position: [0, 0, 0], // Position for the drawn card to move to
-      rotation: [0, 0, 0],
-      flip: true,
-    });
-
+    // Step 2: After 2 seconds, flip back and move to the discard pile
     setTimeout(() => {
-      setDiscardPile([
-        ...discardPile,
-        { ...drawnCard, position: [-5, 0, -0.02 * discardPile.length] },
-      ]); // Add to discard pile
-      setSelectedCard(null);
-    }, 100); // Adjust timeout as needed
+      const discardPosition = [-5, 0, 0.02 * discardPile.length]; // Position in the discard pile
+      const cardToDiscard = {
+        animateToPosition: discardPosition,
+        flip: false,
+      }; // Flip back and set new position
+
+      // Remove the card from the deck immediately to avoid re-animation
+      const updatedDeck = newDeck.filter((_, cardIndex) => cardIndex !== index);
+
+      // Update the discard pile and the deck
+      setDiscardPile((currentDiscardPile) => [
+        ...currentDiscardPile,
+        cardToDiscard,
+      ]);
+      setDeck(updatedDeck);
+    }, 1000);
   };
 
   return (
     <div className="App">
       <Canvas camera={{ position: [0, 0, 20], fov: 30 }}>
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 15, 10]} angle={0.3} />
         <Suspense fallback={null}>
           {deck.map((card, index) => (
             <Card
-              key={`deck-${index}`}
-              position={card.position}
-              rotation={card.rotation} // Apply the tilt to each card
-              onClick={drawCard}
+              key={`deck-${card.id}`}
+              animateToPosition={card.animateToPosition}
               flip={card.flip}
+              onClick={() => drawCard(index)}
             />
           ))}
-          {selectedCard && (
-            <Card
-              position={selectedCard.position}
-              rotation={selectedCard.rotation}
-              flip={selectedCard.flip}
-              onClick={() => {}}
-            />
-          )}
           {discardPile.map((card, index) => (
             <Card
               key={`discard-${index}`}
-              position={card.position}
-              rotation={card.rotation} // Tilt forward for consistency
+              animateToPosition={card.animateToPosition}
               flip={card.flip}
             />
           ))}
