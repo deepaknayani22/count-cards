@@ -39,7 +39,7 @@ function App() {
           },
         ]);
         setDeck((prevDeck) => prevDeck.filter((_, i) => i !== index));
-      }, 2000); // This matches the total animation duration in Card
+      }, 250); // This matches the total animation duration in Card
     },
     [deck, discardPile.length]
   );
