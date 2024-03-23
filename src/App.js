@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useCallback } from "react";
+import React, { Suspense, useState, useCallback, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import Card from "./Card";
 import "./styles.css";
@@ -12,41 +12,65 @@ function App() {
     }))
   );
   const [discardPile, setDiscardPile] = useState([]);
+  const [isDrawing, setIsDrawing] = useState(false); // Controls if we are drawing cards
+  const [isPaused, setIsPaused] = useState(false); // Controls if the drawing is paused
 
-  const drawCard = useCallback(
-    (index) => {
-      const newDeck = [...deck];
-      const cardToMove = {
-        ...newDeck[index],
-        animateToPosition: [0, 0, 0.02 * discardPile.length],
-        flip: true,
-      };
+  const drawCard = useCallback(() => {
+    if (deck.length === 0) return;
+    const index = deck.length - 1; // Always draw the last card
+    const newDeck = [...deck];
+    const cardToMove = {
+      ...newDeck[index],
+      animateToPosition: [0, 0, 0.02 * discardPile.length],
+      flip: true,
+    };
 
-      // Step 1: Animate card to the center and initiate the flip sequence
-      setDeck((prevDeck) =>
-        prevDeck.map((card, i) => (i === index ? cardToMove : card))
-      );
+    setDeck((prevDeck) =>
+      prevDeck.map((card, i) => (i === index ? cardToMove : card))
+    );
 
-      // Step 2: Wait for the card animation to complete before moving it to the discard pile
+    setTimeout(() => {
+      setDiscardPile((prevDiscardPile) => [
+        ...prevDiscardPile,
+        {
+          ...cardToMove,
+          animateToPosition: [-5, 0, 0.02 * prevDiscardPile.length],
+          flip: false,
+        },
+      ]);
+      setDeck((prevDeck) => prevDeck.filter((_, i) => i !== index));
+    }, 250);
+  }, [deck, discardPile.length]);
 
-      setTimeout(() => {
-        setDiscardPile((prevDiscardPile) => [
-          ...prevDiscardPile,
-          {
-            ...cardToMove,
-            animateToPosition: [-5, 0, 0.02 * prevDiscardPile.length],
-            flip: false,
-          },
-        ]);
-        setDeck((prevDeck) => prevDeck.filter((_, i) => i !== index));
-      }, 250); // This matches the total animation duration in Card
-    },
-    [deck, discardPile.length]
-  );
+  useEffect(() => {
+    let timer;
+    if (isDrawing && !isPaused) {
+      timer = setInterval(() => {
+        drawCard();
+      }, 500); // Trigger every second
+    }
+
+    return () => clearInterval(timer);
+  }, [drawCard, isDrawing, isPaused, deck]);
+
+  const handleStartStopClick = () => {
+    setIsDrawing(!isDrawing);
+  };
+
+  const handlePauseResumeClick = () => {
+    setIsPaused(!isPaused);
+  };
 
   return (
     <div className="App">
-      <button onClick={() => drawCard(deck.length - 1)}>Draw Card</button>
+      <button onClick={handleStartStopClick}>
+        {isDrawing ? "Stop Drawing" : "Start Drawing"}
+      </button>
+      {isDrawing && (
+        <button onClick={handlePauseResumeClick}>
+          {isPaused ? "Resume" : "Pause"}
+        </button>
+      )}
       <Canvas camera={{ position: [0, 0, 20], fov: 30 }}>
         <Suspense fallback={null}>
           {deck.map((card, index) => (
