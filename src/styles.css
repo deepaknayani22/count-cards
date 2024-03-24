@@ -30,15 +30,14 @@ canvas {
   top: 0;
   color: #fff; /* Adjust color as needed */
   font-size: 2rem;
-  padding: 20px 0;
 }
 
 /* Style for the 'Start Counting' button */
 .start-counting-btn {
   position: absolute;
   left: 50%;
-  bottom: 20px;
-  transform: translateX(-50%);
+  bottom: 25px;
+  transform: translateX(-100%);
   padding: 10px 20px;
   font-family: "Rye", cursive;
   background-color: #d4af37; /* Gold color for the casino theme */
@@ -51,6 +50,27 @@ canvas {
 }
 
 .start-counting-btn:hover {
-  transform: translateX(-50%) scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for the number of decks dropdown, positioned beside the 'Start Counting' button */
+.num-decks-select {
+  position: absolute;
+  left: calc(45% + 120px); /* Adjust based on the size of your button */
+  bottom: 25px; /* Align with the button vertically */
+  padding: 8px 16px;
+  font-family: "Rye", cursive;
+  background-color: #fff; /* Contrast with the button for visibility */
+  color: #000;
+  border: 2px solid #d4af37; /* Match the button's theme */
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* Adjust dropdown on focus to match the theme */
+.num-decks-select:focus {
+  outline: none;
+  border-color: #f0e68c;
+  box-shadow: 0 0 0 2px rgba(208, 175, 55, 0.5);
 }

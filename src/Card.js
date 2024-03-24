@@ -2,18 +2,16 @@ import React, { useRef, useState, useEffect } from "react";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { animated, useSpring } from "@react-spring/three";
-import backface from "./assets/backfacing.png"; // Keep this for the back of the card
+import backface from "./assets/backfacing.png";
 
 const Card = ({ animateToPosition, flip, cardImage }) => {
   const cardRef = useRef();
 
-  // Use require to dynamically load the card's front texture
-  // You might need to adjust the path depending on your project structure
   const textureFront = useLoader(
     TextureLoader,
     require(`./assets/cards/${cardImage}.png`)
   );
-  // Load the backface texture (static, as before)
+
   const textureBack = useLoader(TextureLoader, backface);
 
   const [isPaused, setIsPaused] = useState(false);
@@ -30,7 +28,7 @@ const Card = ({ animateToPosition, flip, cardImage }) => {
       setTimeout(() => {
         setIsPaused(false);
         api.start({ position: animateToPosition });
-      }, 2000); // Pause for 2 seconds
+      }, 2000);
     }
   });
 
