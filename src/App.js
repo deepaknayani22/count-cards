@@ -22,6 +22,7 @@ function App() {
   ];
 
   const [numDecks, setNumDecks] = useState(1); // State for the number of decks
+  const [showDropDown, setShowDropDown] = useState(true);
 
   // Fisher-Yates shuffle algorithm
   const shuffle = (deck) => {
@@ -98,6 +99,7 @@ function App() {
   }, [numDecks]);
 
   const handleStartStopClick = () => {
+    setShowDropDown(false);
     setIsDrawing(!isDrawing);
   };
 
@@ -105,16 +107,18 @@ function App() {
     <div className="App">
       <div className="header">Learn Card Counting and Basic Strategy</div>
       <p className="header">(refresh page to reset)</p>
-      <select
-        value={numDecks}
-        onChange={(e) => setNumDecks(Number(e.target.value))}
-        className="num-decks-select"
-      >
-        <option value="1">1 Deck</option>
-        <option value="2">2 Decks</option>
-        <option value="3">3 Decks</option>
-        <option value="4">4 Decks</option>
-      </select>
+      {showDropDown && (
+        <select
+          value={numDecks}
+          onChange={(e) => setNumDecks(Number(e.target.value))}
+          className="num-decks-select"
+        >
+          <option value="1">1 Deck</option>
+          <option value="2">2 Decks</option>
+          <option value="3">3 Decks</option>
+          <option value="4">4 Decks</option>
+        </select>
+      )}
       <Canvas camera={{ position: [0, 0, 20], fov: 30 }}>
         <Suspense fallback={null}>
           {deck.map((card, index) => (
