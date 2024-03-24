@@ -4,16 +4,52 @@ import Card from "./Card";
 import "./styles.css";
 
 function App() {
-  const [deck, setDeck] = useState(
-    new Array(52).fill(null).map((_, index) => ({
-      id: index,
-      animateToPosition: [5, 0, 0.02 * index],
-      flip: false,
-    }))
-  );
+  const suits = ["hearts", "diamonds", "clubs", "spades"];
+  const values = [
+    "ace",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "jack",
+    "queen",
+    "king",
+  ];
+
+  // Fisher-Yates shuffle algorithm
+  const shuffle = (deck) => {
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    return deck;
+  };
+
+  // Function to generate and shuffle the deck
+  const generateDeck = () => {
+    const deck = [];
+    for (let suit of suits) {
+      for (let value of values) {
+        deck.push({
+          id: `${value}_of_${suit}`,
+          animateToPosition: [5, 0, 0.02 * deck.length], // Adjust as needed
+          flip: false,
+          cardImage: `${value}_of_${suit}`, // Filename without extension
+        });
+      }
+    }
+    return shuffle(deck); // Shuffle the deck once
+  };
+
+  const [deck, setDeck] = useState(generateDeck());
   const [discardPile, setDiscardPile] = useState([]);
-  const [isDrawing, setIsDrawing] = useState(false); // Controls if we are drawing cards
-  const [isPaused, setIsPaused] = useState(false); // Controls if the drawing is paused
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   const drawCard = useCallback(() => {
     if (deck.length === 0) return;
@@ -47,7 +83,7 @@ function App() {
     if (isDrawing && !isPaused) {
       timer = setInterval(() => {
         drawCard();
-      }, 500); // Trigger every second
+      }, 500); // Trigger every 500ms
     }
 
     return () => clearInterval(timer);
@@ -78,6 +114,7 @@ function App() {
               key={`deck-${card.id}`}
               animateToPosition={card.animateToPosition}
               flip={card.flip}
+              cardImage={card.cardImage}
             />
           ))}
           {discardPile.map((card, index) => (
@@ -85,6 +122,7 @@ function App() {
               key={`discard-${index}`}
               animateToPosition={card.animateToPosition}
               flip={card.flip}
+              cardImage={card.cardImage}
             />
           ))}
         </Suspense>
