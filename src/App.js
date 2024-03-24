@@ -49,7 +49,6 @@ function App() {
   const [deck, setDeck] = useState(generateDeck());
   const [discardPile, setDiscardPile] = useState([]);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
 
   const drawCard = useCallback(() => {
     if (deck.length === 0) return;
@@ -80,33 +79,23 @@ function App() {
 
   useEffect(() => {
     let timer;
-    if (isDrawing && !isPaused) {
+    if (isDrawing) {
       timer = setInterval(() => {
         drawCard();
       }, 500); // Trigger every 500ms
     }
 
     return () => clearInterval(timer);
-  }, [drawCard, isDrawing, isPaused, deck]);
+  }, [drawCard, isDrawing, deck]);
 
   const handleStartStopClick = () => {
     setIsDrawing(!isDrawing);
   };
 
-  const handlePauseResumeClick = () => {
-    setIsPaused(!isPaused);
-  };
-
   return (
     <div className="App">
-      <button onClick={handleStartStopClick}>
-        {isDrawing ? "Stop Drawing" : "Start Drawing"}
-      </button>
-      {isDrawing && (
-        <button onClick={handlePauseResumeClick}>
-          {isPaused ? "Resume" : "Pause"}
-        </button>
-      )}
+      <div className="header">Learn Card Counting and Basic Strategy</div>{" "}
+      {/* Header added */}
       <Canvas camera={{ position: [0, 0, 20], fov: 30 }}>
         <Suspense fallback={null}>
           {deck.map((card, index) => (
@@ -127,6 +116,10 @@ function App() {
           ))}
         </Suspense>
       </Canvas>
+      {/* Button restyled and relocated */}
+      <button className="start-counting-btn" onClick={handleStartStopClick}>
+        {isDrawing ? "Stop Counting" : "Start Counting"}
+      </button>
     </div>
   );
 }
