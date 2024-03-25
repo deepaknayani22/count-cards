@@ -21,10 +21,14 @@ function App() {
     "king",
   ];
 
-  const [numDecks, setNumDecks] = useState(1); // State for the number of decks
+  const [numDecks, setNumDecks] = useState(1);
   const [showDropDown, setShowDropDown] = useState(true);
+  const [counter, setCounter] = useState(0); // Card counter state
+  const [deck, setDeck] = useState([]);
+  const [discardPile, setDiscardPile] = useState([]);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [showCounter, setShowCounter] = useState(true);
 
-  // Fisher-Yates shuffle algorithm
   const shuffle = (deck) => {
     for (let i = deck.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -33,27 +37,22 @@ function App() {
     return deck;
   };
 
-  // Function to generate and shuffle the deck according to the selected number of decks
   const generateDeck = () => {
     let deck = [];
     for (let n = 0; n < numDecks; n++) {
       for (let suit of suits) {
         for (let value of values) {
           deck.push({
-            id: `${value}_of_${suit}_${n}`, // Ensure uniqueness across multiple decks
+            id: `${value}_of_${suit}_${n}`,
             animateToPosition: [5, 0, 0.02 * deck.length],
             flip: false,
-            cardImage: `${value}_of_${suit}`, // Filename without extension
+            cardImage: `${value}_of_${suit}`,
           });
         }
       }
     }
-    return shuffle(deck); // Shuffle the combined decks
+    return shuffle(deck);
   };
-
-  const [deck, setDeck] = useState(generateDeck());
-  const [discardPile, setDiscardPile] = useState([]);
-  const [isDrawing, setIsDrawing] = useState(false);
 
   const drawCard = useCallback(() => {
     if (deck.length === 0) return;
@@ -64,6 +63,13 @@ function App() {
       animateToPosition: [0, 0, 0.02 * discardPile.length],
       flip: true,
     };
+
+    const cardValue = cardToMove.id.split("_")[0];
+    if (["2", "3", "4", "5", "6"].includes(cardValue)) {
+      setCounter((prevCounter) => prevCounter + 1);
+    } else if (["10", "jack", "queen", "king", "ace"].includes(cardValue)) {
+      setCounter((prevCounter) => prevCounter - 1);
+    }
 
     setDeck((prevDeck) =>
       prevDeck.map((card, i) => (i === index ? cardToMove : card))
@@ -93,7 +99,6 @@ function App() {
     return () => clearInterval(timer);
   }, [drawCard, isDrawing, deck]);
 
-  // Regenerate the deck whenever numDecks changes
   useEffect(() => {
     setDeck(generateDeck());
   }, [numDecks]);
@@ -117,9 +122,11 @@ function App() {
           <option value="2">2 Decks</option>
           <option value="3">3 Decks</option>
           <option value="4">4 Decks</option>
+          <option value="5">5 Decks</option>
+          <option value="6">6 Decks</option>
         </select>
       )}
-      <Canvas camera={{ position: [0, 0, 20], fov: 30 }}>
+      <Canvas camera={{ position: [0, 0, 20], fov: 35 }}>
         <Suspense fallback={null}>
           {deck.map((card, index) => (
             <Card
@@ -140,8 +147,14 @@ function App() {
         </Suspense>
       </Canvas>
       <button className="start-counting-btn" onClick={handleStartStopClick}>
-        {isDrawing ? "Stop Counting" : "Start Counting"}
+        {isDrawing ? "Pause Counting" : "Start Counting"}
       </button>
+      <div className="counter-display">
+        <button onClick={() => setShowCounter(!showCounter)}>
+          {showCounter ? "Hide" : "Show"} Count
+        </button>
+        {showCounter && <div>Count: {counter}</div>}
+      </div>
     </div>
   );
 }

@@ -74,3 +74,35 @@ canvas {
   border-color: #f0e68c;
   box-shadow: 0 0 0 2px rgba(208, 175, 55, 0.5);
 }
+
+/* Style for the card counting counter */
+.counter-display {
+  display: flex;
+  position: absolute;
+  left: 90%;
+  top: 50px; /* Adjust based on your layout */
+  transform: translateX(-50%);
+  gap: 10px;
+  width: 300px;
+}
+
+.counter-display div {
+  background-color: #d4af37; /* Gold color to match the theme */
+  padding: 10px 20px;
+  font-family: "Rye", cursive;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25rem;
+}
+
+.counter-display button {
+  padding: 10px 20px;
+  font-family: "Rye", cursive;
+  background-color: #9c88ff; /* Choose a color that fits your theme */
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
