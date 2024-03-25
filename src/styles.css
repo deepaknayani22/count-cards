@@ -12,7 +12,8 @@ body {
 
 html,
 #root,
-.App {
+.card-counter-main,
+.basic-strategy-main {
   height: 100%;
   margin: 0;
   overflow: hidden;
@@ -154,4 +155,57 @@ a {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.deal-button {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-family: "Rye", cursive;
+  background-color: #d4af37; /* Gold color for a casino theme */
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add some depth */
+  transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease;
+}
+
+.deal-button:hover {
+  background-color: #f0e68c; /* Lighter gold on hover for feedback */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly larger shadow for a lifted effect */
+}
+
+.action-buttons {
+  position: absolute;
+  left: 5%; /* Adjusted to be more offset from the left */
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 20px;
+  width: 200px; /* Ensures that the container has a fixed width */
+}
+
+.action-buttons button {
+  display: block;
+  width: 100%; /* Makes all buttons the same width */
+  margin-bottom: 15px;
+  padding: 15px 20px; /* Increased padding for larger buttons */
+  font-family: "Rye", cursive;
+  background-color: #0074d9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em; /* Increased font size for better readability */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow for depth */
+  transition: transform 0.2s; /* Smooth transform transition for feedback */
+}
+
+.action-buttons button:hover {
+  transform: translateY(
+    -2px
+  ); /* Slight upward move on hover for interactive feedback */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover */
 }

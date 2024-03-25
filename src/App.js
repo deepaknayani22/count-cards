@@ -1,12 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import CardCounter from "./CardCounter";
+import BasicStrategy from "./BasicStrategy";
 import "./styles.css";
 
 // Placeholder component for Basic Strategy
-function BasicStrategy() {
-  return <div className="container">Basic Strategy Page</div>;
-}
 
 function App() {
   return (

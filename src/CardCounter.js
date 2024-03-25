@@ -109,9 +109,10 @@ function CardCounter() {
   };
 
   return (
-    <div className="App">
+    <div className="card-counter-main">
       <div className="header">Learn Card Counting and Basic Strategy</div>
       <p className="header">(refresh page to reset)</p>
+
       {showDropDown && (
         <select
           value={numDecks}
