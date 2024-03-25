@@ -29,6 +29,48 @@ canvas {
   overflow: hidden;
 }
 
+.container h1 {
+  text-align: center;
+  color: white;
+}
+
+.home-buttons {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  align-items: center; /* Center the buttons vertically */
+  position: absolute; /* Positioning context */
+  top: 50%; /* Move to the middle of the container */
+  left: 50%; /* Center align the div */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Adjust position to truly center the div */
+  width: 100%; /* Use full width for better responsive behavior */
+  gap: 20px;
+}
+
+.home-buttons button {
+  display: block;
+  margin: 5px auto;
+  padding: 40px 60px;
+  font-family: "Rye", cursive;
+  background-color: #d4af37; /* Gold color for the casino theme */
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-size: 2rem;
+}
+
+.home-buttons button:hover {
+  background-color: #f0e68c;
+}
+
+a {
+  text-decoration: none;
+}
+
 /* Style for the header */
 .header {
   text-align: center;
