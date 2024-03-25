@@ -23,46 +23,80 @@ function BasicStrategy() {
   ];
 
   const [deck, setDeck] = useState([]);
+  const [options, setOptions] = useState([]);
 
   const handleActionSelected = (action) => {
     console.log(`Action selected: ${action}`);
-    // Here, you'll implement the logic based on the ruleset you provide later.
+  };
+
+  const cardValue = (card) => {
+    if (["jack", "queen", "king"].includes(card)) {
+      return 10;
+    } else if (card === "ace") {
+      return 11;
+    } else {
+      return parseInt(card, 10);
+    }
   };
 
   const generateDeck = () => {
     let newDeck = [];
-    for (let suit of suits) {
-      for (let value of values) {
+    suits.forEach((suit) => {
+      values.forEach((value) => {
         newDeck.push({
           id: `${value}_of_${suit}`,
           cardImage: `${value}_of_${suit}`,
         });
-      }
-    }
+      });
+    });
     return shuffle(newDeck);
   };
 
   const shuffle = (deck) => {
-    for (let i = deck.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [deck[i], deck[j]] = [deck[j], deck[i]];
+    let m = deck.length,
+      t,
+      i;
+    while (m) {
+      i = Math.floor(Math.random() * m--);
+      t = deck[m];
+      deck[m] = deck[i];
+      deck[i] = t;
     }
     return deck;
   };
 
   const pickRandomCards = (deck, num) => {
-    let positions = [
-      [0, 3, 0], // First card position
-      [-3, -3, 0], // Second card position
-      [3, -3, 0], // Third card position
-    ];
-    return shuffle([...deck])
-      .slice(0, num)
-      .map((card, index) => ({
-        ...card,
-        animateToPosition: positions[index],
-        flip: true,
-      }));
+    const shuffledDeck = shuffle([...deck]);
+    const pickedCards = shuffledDeck.slice(0, num);
+    determineOptions(pickedCards.slice(1));
+    return pickedCards.map((card, index) => ({
+      ...card,
+      animateToPosition:
+        index === 0 ? [0, 3, 0] : index === 1 ? [-3, -3, 0] : [3, -3, 0],
+      flip: true,
+    }));
+  };
+
+  const determineOptions = (playerCards) => {
+    if (
+      playerCards.length === 2 &&
+      cardValue(playerCards[0].id.split("_of_")[0]) ===
+        cardValue(playerCards[1].id.split("_of_")[0])
+    ) {
+      setOptions(["Split", "Split (if doubling is allowed)", "No split"]);
+    } else if (
+      playerCards.some((card) => cardValue(card.id.split("_of_")[0]) === 11)
+    ) {
+      setOptions([
+        "Blackjack",
+        "Hit",
+        "Stand",
+        "Double if allowed, otherwise hit",
+        "Double if allowed, otherwise stand",
+      ]);
+    } else {
+      setOptions(["Hit", "Stand", "Double"]);
+    }
   };
 
   const dealCards = () => {
@@ -72,7 +106,7 @@ function BasicStrategy() {
   };
 
   useEffect(() => {
-    dealCards(); // Initial deal on component mount
+    dealCards();
   }, []);
 
   return (
@@ -94,7 +128,10 @@ function BasicStrategy() {
       <button className="deal-button" onClick={dealCards}>
         Deal
       </button>
-      <ActionButtons onActionSelected={handleActionSelected} />
+      <ActionButtons
+        options={options}
+        onActionSelected={handleActionSelected}
+      />
     </div>
   );
 }

@@ -1,13 +1,12 @@
+import React from "react";
 import "./styles.css";
 
-function ActionButtons({ onActionSelected }) {
-  const actions = ["Hit", "Stand", "Double", "Split", "Blackjack"];
-
+function ActionButtons({ options, onActionSelected }) {
   return (
     <div className="action-buttons">
-      {actions.map((action) => (
-        <button key={action} onClick={() => onActionSelected(action)}>
-          {action}
+      {options.map((option) => (
+        <button key={option} onClick={() => onActionSelected(option)}>
+          {option}
         </button>
       ))}
     </div>
