@@ -209,3 +209,22 @@ a {
   ); /* Slight upward move on hover for interactive feedback */
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover */
 }
+
+.score-display {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.high-score,
+.score {
+  color: #fff; /* White color for text */
+  font-family: "Rye", cursive; /* Matching the global font */
+  font-size: 1.5rem; /* Slightly larger font size */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  padding: 5px 10px;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Adding a subtle shadow for depth */
+}

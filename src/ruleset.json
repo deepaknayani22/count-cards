@@ -1,0 +1,641 @@
+{
+  "other": [
+    {
+      "playerSum": 19,
+      "dealerCards": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "jack",
+        "queen",
+        "king",
+        "ace"
+      ],
+      "action": "Stand"
+    },
+    {
+      "playerSum": 18,
+      "dealerCards": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "jack",
+        "queen",
+        "king",
+        "ace"
+      ],
+      "action": "Stand"
+    },
+    {
+      "playerSum": 17,
+      "dealerCards": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "jack",
+        "queen",
+        "king",
+        "ace"
+      ],
+      "action": "Stand"
+    },
+    {
+      "playerSum": 16,
+      "dealerCards": ["2", "3", "4", "5", "6"],
+      "action": "Stand"
+    },
+    {
+      "playerSum": 16,
+      "dealerCards": ["7", "8", "9", "10", "jack", "queen", "king", "ace"],
+      "action": "Hit"
+    },
+    {
+      "playerSum": 15,
+      "dealerCards": ["2", "3", "4", "5", "6"],
+      "action": "Stand"
+    },
+    {
+      "playerSum": 15,
+      "dealerCards": ["7", "8", "9", "10", "jack", "queen", "king", "ace"],
+      "action": "Hit"
+    },
+    {
+      "playerSum": 14,
+      "dealerCards": ["2", "3", "4", "5", "6"],
+      "action": "Stand"
+    },
+    {
+      "playerSum": 14,
+      "dealerCards": ["7", "8", "9", "10", "jack", "queen", "king", "ace"],
+      "action": "Hit"
+    },
+    {
+      "playerSum": 13,
+      "dealerCards": ["2", "3", "4", "5", "6"],
+      "action": "Stand"
+    },
+    {
+      "playerSum": 13,
+      "dealerCards": ["7", "8", "9", "10", "jack", "queen", "king", "ace"],
+      "action": "Hit"
+    },
+    {
+      "playerSum": 12,
+      "dealerCards": [
+        "2",
+        "3",
+        "7",
+        "8",
+        "9",
+        "10",
+        "jack",
+        "queen",
+        "king",
+        "ace"
+      ],
+      "action": "Hit"
+    },
+    { "playerSum": 12, "dealerCards": ["4", "5", "6"], "action": "Stand" },
+    {
+      "playerSum": 11,
+      "dealerCards": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "jack",
+        "queen",
+        "king",
+        "ace"
+      ],
+      "action": "Double"
+    },
+    {
+      "playerSum": 10,
+      "dealerCards": ["2", "3", "4", "5", "6", "7", "8", "9"],
+      "action": "Double"
+    },
+    {
+      "playerSum": 10,
+      "dealerCards": ["10", "jack", "queen", "king", "ace"],
+      "action": "Hit"
+    },
+    { "playerSum": 9, "dealerCards": ["3", "4", "5", "6"], "action": "Double" },
+    {
+      "playerSum": 9,
+      "dealerCards": ["2", "7", "8", "9", "10", "jack", "queen", "king", "ace"],
+      "action": "Hit"
+    },
+    {
+      "playerSum": 8,
+      "dealerCards": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "jack",
+        "queen",
+        "king",
+        "ace"
+      ],
+      "action": "Hit"
+    },
+    {
+      "playerSum": 7,
+      "dealerCards": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "jack",
+        "queen",
+        "king",
+        "ace"
+      ],
+      "action": "Hit"
+    },
+    {
+      "playerSum": 6,
+      "dealerCards": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "jack",
+        "queen",
+        "king",
+        "ace"
+      ],
+      "action": "Hit"
+    },
+    {
+      "playerSum": 5,
+      "dealerCards": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "jack",
+        "queen",
+        "king",
+        "ace"
+      ],
+      "action": "Hit"
+    }
+  ],
+  "edgeCases": {
+    "acePresent": [
+      {
+        "playerCard": "9",
+        "dealerCards": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Stand"
+      },
+      {
+        "playerCard": "8",
+        "dealerCards": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Stand"
+      },
+      {
+        "playerCard": "8",
+        "dealerCards": ["6"],
+        "action": "Double if allowed, otherwise stand"
+      },
+      {
+        "playerCard": "7",
+        "dealerCards": ["2", "3", "4", "5", "6"],
+        "action": "Double if allowed, otherwise stand"
+      },
+      { "playerCard": "7", "dealerCards": ["7", "8"], "action": "Stand" },
+      {
+        "playerCard": "7",
+        "dealerCards": ["9", "10", "jack", "queen", "king", "ace"],
+        "action": "Hit"
+      },
+      {
+        "playerCard": "6",
+        "dealerCards": ["3", "4", "5", "6"],
+        "action": "Double if allowed, otherwise hit"
+      },
+      {
+        "playerCard": "6",
+        "dealerCards": [
+          "2",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Hit"
+      },
+      {
+        "playerCard": "5",
+        "dealerCards": ["4", "5", "6"],
+        "action": "Double if allowed, otherwise hit"
+      },
+      {
+        "playerCard": "5",
+        "dealerCards": [
+          "2",
+          "3",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Hit"
+      },
+      {
+        "playerCard": "4",
+        "dealerCards": ["4", "5", "6"],
+        "action": "Double if allowed, otherwise hit"
+      },
+      {
+        "playerCard": "4",
+        "dealerCards": [
+          "2",
+          "3",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Hit"
+      },
+      {
+        "playerCard": "3",
+        "dealerCards": ["4", "5", "6", "7"],
+        "action": "Double if allowed, otherwise hit"
+      },
+      {
+        "playerCard": "3",
+        "dealerCards": [
+          "2",
+          "3",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Hit"
+      },
+      {
+        "playerCard": "2",
+        "dealerCards": ["4", "5", "6", "7"],
+        "action": "Double if allowed, otherwise hit"
+      },
+      {
+        "playerCard": "2",
+        "dealerCards": [
+          "2",
+          "3",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Hit"
+      },
+      {
+        "playerCard": "king",
+        "dealerCards": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Blackjack"
+      },
+      {
+        "playerCard": "queen",
+        "dealerCards": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Blackjack"
+      },
+      {
+        "playerCard": "jack",
+        "dealerCards": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Blackjack"
+      },
+      {
+        "playerCard": "10",
+        "dealerCards": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Blackjack"
+      }
+    ],
+    "pairs": [
+      {
+        "playerCards": "11",
+        "dealerCards": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Split"
+      },
+      {
+        "playerCards": "10",
+        "dealerCards": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "No split"
+      },
+      {
+        "playerCards": "9",
+        "dealerCards": ["2", "3", "4", "5", "6", "8", "9"],
+        "action": "Split"
+      },
+      {
+        "playerCards": "9",
+        "dealerCards": ["7", "10", "jack", "queen", "king", "ace"],
+        "action": "No split"
+      },
+      {
+        "playerCards": "8",
+        "dealerCards": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "Split"
+      },
+      {
+        "playerCards": "7",
+        "dealerCards": ["2", "3", "4", "5", "6", "7"],
+        "action": "Split"
+      },
+      {
+        "playerCards": "7",
+        "dealerCards": ["8", "9", "10", "jack", "queen", "king", "ace"],
+        "action": "No split"
+      },
+      {
+        "playerCards": "6",
+        "dealerCards": ["3", "4", "5", "6"],
+        "action": "Split"
+      },
+      {
+        "playerCards": "6",
+        "dealerCards": [
+          "2",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "No Split"
+      },
+      {
+        "playerCards": "5",
+        "dealerCards": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "No split"
+      },
+      {
+        "playerCards": "4",
+        "dealerCards": ["5", "6"],
+        "action": "Split (if doubling is allowed)"
+      },
+      {
+        "playerCards": "4",
+        "dealerCards": [
+          "2",
+          "3",
+          "4",
+          "7",
+          "8",
+          "9",
+          "10",
+          "jack",
+          "queen",
+          "king",
+          "ace"
+        ],
+        "action": "No Split"
+      },
+      {
+        "playerCards": "3",
+        "dealerCards": ["2", "3", "4", "5", "6", "7"],
+        "action": "Split"
+      },
+      {
+        "playerCards": "3",
+        "dealerCards": ["8", "9", "10", "jack", "queen", "king", "ace"],
+        "action": "No Split"
+      },
+      {
+        "playerCards": "2",
+        "dealerCards": ["2", "3", "4", "5", "6", "7"],
+        "action": "Split"
+      },
+      {
+        "playerCards": "2",
+        "dealerCards": ["8", "9", "10", "jack", "queen", "king", "ace"],
+        "action": "No Split"
+      }
+    ]
+  }
+}

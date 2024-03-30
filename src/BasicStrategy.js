@@ -2,6 +2,7 @@ import React, { Suspense, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import Card from "./Card";
 import ActionButtons from "./ActionButtons";
+import { determineAction } from "./determineAction";
 import "./styles.css";
 
 function BasicStrategy() {
@@ -24,9 +25,29 @@ function BasicStrategy() {
 
   const [deck, setDeck] = useState([]);
   const [options, setOptions] = useState([]);
+  const [correctOption, setCorrectOption] = useState("");
+  const [selectedAction, setSelectedAction] = useState("");
+  const [isActionCorrect, setIsActionCorrect] = useState(null);
+  const [highScore, setHighScore] = useState(0);
+  const [score, setScore] = useState(0);
+  const [buttonsDisabled, setButtonsDisabled] = useState(false);
+  const [dealBtn, setDealBtn] = useState(false);
 
   const handleActionSelected = (action) => {
-    console.log(`Action selected: ${action}`);
+    if (buttonsDisabled) return; // Prevents function execution if buttons are disabled
+
+    setSelectedAction(action);
+    const correct = action === correctOption;
+    setIsActionCorrect(correct);
+    setDealBtn(false);
+    setButtonsDisabled(true); // Disable buttons after a selection
+
+    if (correct) {
+      setScore(score + 1);
+    } else {
+      setHighScore((currentHighScore) => Math.max(currentHighScore, score)); // Update high score if necessary
+      setScore(0);
+    }
   };
 
   const cardValue = (card) => {
@@ -69,12 +90,21 @@ function BasicStrategy() {
     const shuffledDeck = shuffle([...deck]);
     const pickedCards = shuffledDeck.slice(0, num);
     determineOptions(pickedCards.slice(1));
+    updateCorrectAction(pickedCards);
     return pickedCards.map((card, index) => ({
       ...card,
       animateToPosition:
         index === 0 ? [0, 3, 0] : index === 1 ? [-3, -3, 0] : [3, -3, 0],
       flip: true,
     }));
+  };
+
+  // IGNORE FOR NOW
+  const updateCorrectAction = (cards) => {
+    const playerCards = cards.slice(1).map((card) => card.id.split("_of_")[0]);
+    const dealerCard = cards[0].id.split("_of_")[0];
+    const action = determineAction(playerCards, dealerCard);
+    setCorrectOption(action);
   };
 
   const determineOptions = (playerCards) => {
@@ -100,6 +130,10 @@ function BasicStrategy() {
   };
 
   const dealCards = () => {
+    setDealBtn(true);
+    setSelectedAction("");
+    setIsActionCorrect(null);
+    setButtonsDisabled(false);
     const newDeck = generateDeck();
     const randomCards = pickRandomCards(newDeck, 3);
     setDeck(randomCards);
@@ -113,6 +147,10 @@ function BasicStrategy() {
     <div className="basic-strategy-main">
       <div className="header">Learn Card Counting and Basic Strategy</div>
       <p className="header">(refresh page to reset)</p>
+      <div className="score-display">
+        <div className="high-score">High Score: {highScore}</div>
+        <div className="score">Score: {score}</div>
+      </div>
       <Canvas camera={{ position: [0, 0, 20], fov: 35 }}>
         <Suspense fallback={null}>
           {deck.map((card) => (
@@ -125,12 +163,16 @@ function BasicStrategy() {
           ))}
         </Suspense>
       </Canvas>
-      <button className="deal-button" onClick={dealCards}>
+      <button className="deal-button" onClick={dealCards} disabled={dealBtn}>
         Deal
       </button>
       <ActionButtons
         options={options}
         onActionSelected={handleActionSelected}
+        selectedAction={selectedAction}
+        isActionCorrect={isActionCorrect}
+        correctOption={correctOption}
+        disabled={buttonsDisabled}
       />
     </div>
   );
