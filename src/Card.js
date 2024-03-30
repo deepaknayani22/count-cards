@@ -41,7 +41,7 @@ const Card = ({ animateToPosition, flip, cardImage }) => {
   return (
     <animated.mesh position={spring.position} ref={cardRef}>
       <boxGeometry args={[3, 3.6, 0.03]} />
-      <meshBasicMaterial map={flip ? textureFront : textureBack} />
+      <meshBasicMaterial map={flip ? textureFront : textureBack} transparent />
     </animated.mesh>
   );
 };
