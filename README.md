@@ -1,4 +1,4 @@
-# card-counter
+# Check out the live version - https://blackjacktrainer.vercel.app/
 
 # An attempt at providing a fun card counting practice interface
 
